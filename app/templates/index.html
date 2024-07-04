@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guardian-IDS Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Guardian-IDS Dashboard</h1>
+        <div class="dashboard">
+            <div class="card">
+                <h2>Recent Alerts</h2>
+                <ul>
+                    {% for alert in alerts %}
+                        <li class="alert">{{ alert[1] }} - {{ alert[2] }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="card">
+                <h2>Network Statistics</h2>
+                <div class="stats">
+                    <p>Total Packets:</p>
+                    <span>{{ stats.total_packets }}</span>
+                </div>
+                <h3>Top 5 IP Addresses:</h3>
+                <ul>
+                    {% for ip, count in stats.top_ips %}
+                        <li>{{ ip }}: <span>{{ count }}</span> packets</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <footer>
+        &copy; 2024 Guardian-IDS. All rights reserved.
+    </footer>
+    <script>
+        function refreshDashboard() {
+            location.reload();
+        }
+        setInterval(refreshDashboard, 5000); // Refresh every 5 seconds
+    </script>
+</body>
+</html>

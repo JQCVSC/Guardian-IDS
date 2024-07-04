@@ -1,0 +1,7 @@
+version: '3'
+services:
+  guardian-ids:
+    build: .
+    network_mode: host
+    volumes:
+      - .:/app
